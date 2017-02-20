@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <None Update="DogecoinBank.Web.db" CopyToOutputDirectory="CopyIfNewer" />
-	<Content Update="appsettings.json" CopyToOutputDirectory="CopyIfNewer" />
 	<Content Update="appsettings.*.json" CopyToOutputDirectory="CopyIfNewer" />
   </ItemGroup>
 
