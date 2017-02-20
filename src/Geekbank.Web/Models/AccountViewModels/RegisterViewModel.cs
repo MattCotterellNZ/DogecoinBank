@@ -63,7 +63,7 @@ namespace Geekbank.Web.Models.AccountViewModels
         };
 
         [Required]
-        [Display(Name = "Gender")]
+        [Display(Name = "Marital Status")]
         public string MaritalStatus { get; set; }
 
         public List<SelectListItem> MaritalStatuses { get; } = new List<SelectListItem>
