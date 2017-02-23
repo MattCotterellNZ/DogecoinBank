@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,7 @@ namespace Geekbank.Web
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
+                builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -48,6 +50,8 @@ namespace Geekbank.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.AddApplicationInsightsTelemetry(Configuration);
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
