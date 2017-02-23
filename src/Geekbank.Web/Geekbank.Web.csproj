@@ -1,17 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Web" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <UserSecretsId>aspnet-Geekbank.Web-9855F907-F51E-4D1C-A100-2FF3666D868F</UserSecretsId>
+    <Version>1.0.0-alpha2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="DogecoinBank.Web.db" CopyToOutputDirectory="CopyIfNewer" />
-	<Content Update="appsettings.json" CopyToOutputDirectory="CopyIfNewer" />
-	<Content Update="appsettings.*.json" CopyToOutputDirectory="CopyIfNewer" />
+    <None Update="Geekbank.Web.db" CopyToOutputDirectory="CopyIfNewer" />
+    <Content Update="appsettings.json" CopyToOutputDirectory="CopyIfNewer" />
+	  <Content Update="appsettings.*.json" CopyToOutputDirectory="CopyIfNewer" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="1.1.0" />
@@ -21,10 +23,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <Version>1.1.0-preview4-final</Version>
     </PackageReference>
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.0" />
   </ItemGroup>
 </Project>

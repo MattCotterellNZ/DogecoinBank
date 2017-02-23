@@ -66,6 +66,7 @@ textarea {
 
 .navbar {
 	font-family: Hack, monospace;
+	background-color: black;
 }
 
 .navbar-brand {

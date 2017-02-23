@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Geekbank.Web.Data;
 using Geekbank.Web.Models;
 using Geekbank.Web.Services;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace Geekbank.Web
 {
@@ -24,13 +26,24 @@ namespace Geekbank.Web
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
+            builder.AddEnvironmentVariables();
+            var partialConfig = builder.Build();
+
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
+                builder.AddApplicationInsightsSettings(developerMode: true);
             }
-
-            builder.AddEnvironmentVariables();
+            else
+            {
+                builder.AddAzureKeyVault(
+                    $"https://{partialConfig["Azure:KeyVault:VaultName"]}.vault.azure.net/",
+                    partialConfig["Azure:ActiveDirectory:ClientId"],
+                    partialConfig["Azure:ActiveDirectory:ClientSecret"]
+                );
+            }
+            
             Configuration = builder.Build();
         }
 
@@ -48,6 +61,13 @@ namespace Geekbank.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.AddRecaptcha(new RecaptchaOptions {
+                SiteKey = Configuration["Recaptcha:SiteKey"],
+                SecretKey = Configuration["Recaptcha:SecretKey"]
+            });
+
+            services.AddApplicationInsightsTelemetry(Configuration);
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
