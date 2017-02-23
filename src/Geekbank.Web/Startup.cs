@@ -26,14 +26,24 @@ namespace Geekbank.Web
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
+            builder.AddEnvironmentVariables();
+            var partialConfig = builder.Build();
+
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
-
-            builder.AddEnvironmentVariables();
+            else
+            {
+                builder.AddAzureKeyVault(
+                    $"https://{Configuration["Azure:KeyVault:VaultName"]}.vault.azure.net/",
+                    Configuration["Azure:ActiveDirectory:ClientId"],
+                    Configuration["Azure:ActiveDirectory:ClientSecret"]
+                );
+            }
+            
             Configuration = builder.Build();
         }
 
