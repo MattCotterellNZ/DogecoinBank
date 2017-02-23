@@ -38,9 +38,9 @@ namespace Geekbank.Web
             else
             {
                 builder.AddAzureKeyVault(
-                    $"https://{Configuration["Azure:KeyVault:VaultName"]}.vault.azure.net/",
-                    Configuration["Azure:ActiveDirectory:ClientId"],
-                    Configuration["Azure:ActiveDirectory:ClientSecret"]
+                    $"https://{partialConfig["Azure:KeyVault:VaultName"]}.vault.azure.net/",
+                    partialConfig["Azure:ActiveDirectory:ClientId"],
+                    partialConfig["Azure:ActiveDirectory:ClientSecret"]
                 );
             }
             
