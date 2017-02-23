@@ -3,11 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <UserSecretsId>aspnet-Geekbank.Web-9855F907-F51E-4D1C-A100-2FF3666D868F</UserSecretsId>
+    <Version>1.0.0-alpha2</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <None Update="Geekbank.Web.db" CopyToOutputDirectory="CopyIfNewer" />
-	<Content Update="appsettings.*.json" CopyToOutputDirectory="CopyIfNewer" />
+    <Content Update="appsettings.json" CopyToOutputDirectory="CopyIfNewer" />
+	  <Content Update="appsettings.*.json" CopyToOutputDirectory="CopyIfNewer" />
   </ItemGroup>
 
   <ItemGroup>
