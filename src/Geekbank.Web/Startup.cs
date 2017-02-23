@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Geekbank.Web.Data;
 using Geekbank.Web.Models;
 using Geekbank.Web.Services;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace Geekbank.Web
 {
@@ -50,6 +51,11 @@ namespace Geekbank.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.AddRecaptcha(new RecaptchaOptions {
+                SiteKey = Configuration["Recaptcha:SiteKey"],
+                SecretKey = Configuration["Recaptcha:SecretKey"]
+            });
 
             services.AddApplicationInsightsTelemetry(Configuration);
 

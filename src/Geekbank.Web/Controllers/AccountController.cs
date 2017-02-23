@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Geekbank.Web.Models;
 using Geekbank.Web.Models.AccountViewModels;
 using Geekbank.Web.Services;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace Geekbank.Web.Controllers
 {
@@ -107,6 +108,7 @@ namespace Geekbank.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateRecaptcha]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

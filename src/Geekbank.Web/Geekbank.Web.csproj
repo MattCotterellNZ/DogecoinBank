@@ -26,5 +26,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <Version>1.1.0-preview4-final</Version>
     </PackageReference>
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.0" />
   </ItemGroup>
 </Project>
