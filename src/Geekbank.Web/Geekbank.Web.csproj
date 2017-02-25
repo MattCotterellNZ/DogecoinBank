@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <UserSecretsId>aspnet-Geekbank.Web-9855F907-F51E-4D1C-A100-2FF3666D868F</UserSecretsId>
-    <Version>1.0.0-alpha3</Version>
+    <Version>1.0.0-beta1</Version>
     <ApplicationInsightsResourceId>/subscriptions/a8f7cdff-6d3b-4bf5-97c1-19715e17ca4b/resourcegroups/OWASP-GeekBank/providers/microsoft.insights/components/geekbank</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/a8f7cdff-6d3b-4bf5-97c1-19715e17ca4b/resourcegroups/OWASP-GeekBank/providers/microsoft.insights/components/geekbank</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
@@ -26,6 +26,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="1.0.0" />

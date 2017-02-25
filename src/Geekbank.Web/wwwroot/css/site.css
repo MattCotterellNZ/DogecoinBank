@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: "Hack", monospace;
 }
 
 /* Wrapping element */
@@ -65,7 +66,7 @@ textarea {
 }
 
 .navbar {
-	font-family: Hack, monospace;
+	/*font-family: Hack, monospace;*/
 	background-color: black;
 }
 
