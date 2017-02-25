@@ -71,7 +71,8 @@ namespace Geekbank.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return Redirect(returnUrl); // Deliberately introduce Open Redirect vulnerability for demo
+                    // return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
