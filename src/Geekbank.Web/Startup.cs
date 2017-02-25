@@ -66,9 +66,7 @@ namespace Geekbank.Web
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                {
-                    options.UseSqlServer(@"Server=(localdb)\\geekbank;Database=Geekbank;Trusted_Connection=True;");
-                });
+                    options.UseSqlite(@"DataSource=.\\Geekbank.Web.db"));
             }
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
