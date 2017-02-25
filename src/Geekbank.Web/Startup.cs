@@ -55,8 +55,21 @@ namespace Geekbank.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration["Azure:SqlServer:ConnectionString"]));
+            var dbOptions = new DbContextOptionsBuilder();
+            if (Configuration["ASPNETCORE_ENVIRONMENT"] == "Production")
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                {
+                    options.UseSqlServer(Configuration["Azure:SqlServer:ConnectionString"]);
+                });
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                {
+                    options.UseSqlServer(@"Server=(localdb)\\geekbank;Database=Geekbank;Trusted_Connection=True;");
+                });
+            }
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -84,7 +97,7 @@ namespace Geekbank.Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("Testing"))
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
