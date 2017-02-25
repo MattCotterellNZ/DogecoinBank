@@ -86,7 +86,7 @@ namespace Geekbank.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, SendGridEmailSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, SendGridSmsSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
