@@ -14,6 +14,8 @@ using Geekbank.Web.Data;
 using Geekbank.Web.Models;
 using Geekbank.Web.Services;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
+using SendGrid;
+using AspNet.Security.OAuth.GitHub;
 
 namespace Geekbank.Web
 {
@@ -54,7 +56,7 @@ namespace Geekbank.Web
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration["Azure:SqlServer:ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -69,8 +71,10 @@ namespace Geekbank.Web
 
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddTransient(c => new SendGridClient(Configuration["SendGrid:ApiKey"]));
+
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
@@ -99,6 +103,24 @@ namespace Geekbank.Web
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseTwitterAuthentication(new TwitterOptions()
+            {
+                ConsumerKey = Configuration["Twitter:ApiKey"],
+                ConsumerSecret = Configuration["Twitter:ApiSecret"],
+            });
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Google:ClientId"],
+                ClientSecret = Configuration["Google:ClientSecret"],
+            });
+
+            app.UseGitHubAuthentication(new GitHubAuthenticationOptions()
+            {
+                ClientId = Configuration["GitHub:ClientId"],
+                ClientSecret = Configuration["GitHub:ClientSecret"],
+            });
 
             app.UseMvc(routes =>
             {
