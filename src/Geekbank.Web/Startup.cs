@@ -14,6 +14,7 @@ using Geekbank.Web.Data;
 using Geekbank.Web.Models;
 using Geekbank.Web.Services;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
+using SendGrid;
 
 namespace Geekbank.Web
 {
@@ -69,8 +70,10 @@ namespace Geekbank.Web
 
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddTransient(c => new SendGridClient(Configuration["SendGrid:ApiKey"]));
+
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
