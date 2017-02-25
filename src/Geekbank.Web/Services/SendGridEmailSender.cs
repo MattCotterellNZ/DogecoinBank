@@ -19,7 +19,7 @@ namespace Geekbank.Web.Services
             {
                 From = new EmailAddress("system@bank.geek.nz", "Geekbank"),
                 Subject = subject,
-                PlainTextContent = message
+                HtmlContent = message
             };
             msg.AddTo(new EmailAddress(email));
             var response = await _sendGridClient.SendEmailAsync(msg);
