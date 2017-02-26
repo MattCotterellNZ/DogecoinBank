@@ -1,0 +1,19 @@
+﻿@model IEnumerable<KeyValuePair<string, string>>
+@{
+    ViewData["Title"] = "Manage your external logins";
+}
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Key</td>
+            <td>@item.Value</td>
+        </tr>
+    }
+</table>
