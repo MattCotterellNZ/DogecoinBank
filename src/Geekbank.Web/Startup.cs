@@ -58,11 +58,16 @@ namespace Geekbank.Web
             var dbOptions = new DbContextOptionsBuilder();
             if (Configuration["ASPNETCORE_ENVIRONMENT"] == "Production")
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
+				// TODO: Fix SQL Server (use SQLite for now, we just need to get the demo done
+				services.AddDbContext<ApplicationDbContext>(options =>
+					options.UseSqlite(@"DataSource=.\\Geekbank.Web.db"));
+				/*
+				 * services.AddDbContext<ApplicationDbContext>(options =>
                 {
                     options.UseSqlServer(Configuration["Azure:SqlServer:ConnectionString"]);
                 });
-            }
+                */
+			}
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
@@ -87,6 +92,7 @@ namespace Geekbank.Web
             // Add application services.
             services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<ISmsSender, SendGridSmsSender>();
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
