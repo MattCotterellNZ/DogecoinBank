@@ -71,6 +71,7 @@ namespace Geekbank.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
+					if (string.IsNullOrWhiteSpace(returnUrl)) return RedirectToAction("Home", "Index");
                     return Redirect(returnUrl); // Deliberately introduce Open Redirect vulnerability for demo
                     // return RedirectToLocal(returnUrl);
                 }
