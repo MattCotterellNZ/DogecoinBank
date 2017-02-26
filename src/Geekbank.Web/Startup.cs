@@ -106,7 +106,11 @@ namespace Geekbank.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                // Enabling detailed error messages in prod is a bad idea, but I'm doing it for the purposes of the demo
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+
+                //app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
